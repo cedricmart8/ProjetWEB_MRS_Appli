@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 200px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logoInscription {
+  height: 300px;
+}
+
+.blockTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.App-header {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  height: 200px;
+  padding: 20px;
+  color: black;
+}
+
+.App-header:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.blockInscription {
+  vertical-align: top;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.blockGauche {
+  width: 33%;
+}
+
+.blockCentrale {
+  width: 33%;
+}
+
+.toggle {
+  width: 50%;
+  margin: auto;
+}
+
+.blockButton {
+  display: flex;
+  width: 50%;
+  margin-left: 25%;
+  justify-content: space-around;
+}
