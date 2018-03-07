@@ -5,6 +5,25 @@
 .App-logo {
   /* animation: App-logo-spin infinite 20s linear; */
   height: 200px;
+  margin-left: 35%;
+}
+
+.imgHeader {
+  margin-left: 35%;
+}
+
+.App-header {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  height: 200px;
+  padding: 0px;
+  color: black;
+  display: flex;
+}
+
+.App-Menu {
+  margin: 10px;
 }
 
 @keyframes App-logo-spin {
@@ -21,15 +40,6 @@
   justify-content: center;
 }
 
-.App-header {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  height: 200px;
-  padding: 20px;
-  color: black;
-}
-
 .App-header:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -42,11 +52,11 @@
 }
 
 .blockGauche {
-  width: 33%;
+  width: 10%;
 }
 
 .blockCentrale {
-  width: 33%;
+  width: 10%;
 }
 
 .toggle {
@@ -59,4 +69,19 @@
   width: 50%;
   margin-left: 25%;
   justify-content: space-around;
+}
+
+.blockMyProfil {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.photoProfil {
+  width: 100px;
+  height: 100px;
+}
+
+.buttonMenu {
+  margin: 10px;
 }

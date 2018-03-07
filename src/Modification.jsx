@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './data/logo.jpg';
 import './App.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -40,13 +39,13 @@ class Modification extends Component {
                 </div>
                 <br />
                 <div className="blockButton">
-                    <RaisedButton label="Modification" />
-                    <RaisedButton label="Supprimer Compte" backgroundColor="red" onClick={this.props.change(4)}/>
+                    <RaisedButton label="Modification" onClick={this.props.navig(1)}/>
+                    <RaisedButton label="Supprimer Compte" backgroundColor="red" onClick={this.props.navig(10)} />
                 </div>
                 <br />
-                <div>
+                {/* <div>
                     <img src={logo} className="logoInscription" alt="logo" />
-                </div>
+                </div> */}
             </form >
         )
     }

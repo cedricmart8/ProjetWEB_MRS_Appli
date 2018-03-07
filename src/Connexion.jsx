@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class Connexion extends Component {
+
     render() {
         return (
             <div className="blockConnexion">
@@ -11,15 +12,15 @@ class Connexion extends Component {
                     <h1> {this.props.name} </h1>
                 </div>
                 <form action="profil.html" method="post">
-                    <TextField hintText="Email" name="mailConnexion" required />
+                    <TextField hintText="Email" name="mailConnexion" errorText="This field is required"/>
                     <br />
-                    <TextField hintText="Password" name="password" type="password" required />
+                    <TextField hintText="Password" name="password" type="password" />
                     <br />
                     <br />
-                    <RaisedButton label="Connexion" />
+                    <RaisedButton label="Connexion" onClick={this.props.navig(4)} />
                 </form >
                 <br />
-                <RaisedButton label="Inscription" onClick={this.props.change(2)} />
+                <RaisedButton label="Inscription" onClick={this.props.navig(2)} />
                 <br />
                 <br />
                 <a href="./motdepasseOublier" id="mdpforgot">Mot de passe oublié ?</a>

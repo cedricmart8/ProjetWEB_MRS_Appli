@@ -8,10 +8,6 @@ import Toggle from 'material-ui/Toggle';
 
 class Inscription extends Component {
 
-    handleChange(i) {
-        sessionStorage.setItem('navigation', i);
-    }
-
     render() {
         return (
             <form action="profil.html" method="post">
@@ -35,7 +31,7 @@ class Inscription extends Component {
                         <DatePicker hintText="Date de naissane" mode="landscape" />
                         <br />
                         <div className="toggle">
-                            <Toggle label="Compte publique" />
+                            <Toggle label="Compte publique" defaultToggled={true}/>
                         </div>
                         <br />
                         <div className="toggle">
@@ -45,7 +41,7 @@ class Inscription extends Component {
                 </div>
                 <br />
                 <div className="blockButton">
-                    <RaisedButton label="Inscription" onClick={this.handleChange(1)}/>
+                    <RaisedButton label="Inscription" onClick={this.props.navig(1)}/>
                 </div>
                 <br />
                 <div>
