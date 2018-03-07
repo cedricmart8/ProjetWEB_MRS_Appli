@@ -52,10 +52,18 @@
 }
 
 .blockGauche {
-  width: 10%;
+  width: 33%;
 }
 
 .blockCentrale {
+  width: 33%;
+}
+
+.block1{
+  width: 10%;
+}
+
+.block2{
   width: 10%;
 }
 
