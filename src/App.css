@@ -18,7 +18,6 @@
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   height: 200px;
   padding: 0px;
-  color: black;
   display: flex;
 }
 
@@ -48,7 +47,7 @@
   vertical-align: top;
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 2px;
 }
 
 .blockGauche {
@@ -92,4 +91,32 @@
 
 .buttonMenu {
   margin: 10px;
+}
+
+.block1Home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.block2Home {
+  margin: 10px;
+  width: 33%
+}
+
+.block3Home {
+  margin: 10px;
+  width: 33%
+}
+
+.blockMap {
+  margin: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  height: 600px;
+  width: 33%;
+}
+
+.blockMap:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }

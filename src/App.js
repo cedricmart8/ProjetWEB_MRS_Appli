@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Inscription from './Inscription.jsx';
 import Modification from './Modification';
 import MyProfil from './MyProfil';
+import Home from './Home';
 import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -42,6 +43,8 @@ class App extends Component {
       res = <Modification name="Modification" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 4) {
       res = <MyProfil name="MyProfil" navig={this.handleClick} />
+    } else if (parseInt(this.state.navigation, 10) === 5) {
+      res = <Home name="Home" navig={this.handleClick} />
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
     }
@@ -57,6 +60,7 @@ class App extends Component {
                 <MenuItem onClick={this.handleClick(2)}>Inscription</MenuItem>
                 <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
                 <MenuItem onClick={this.handleClick(4)}>MyProfil</MenuItem>
+                <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
               </Drawer>
             </div>
             <div className="imgHeader">

@@ -12,9 +12,9 @@ class Connexion extends Component {
                     <h1> {this.props.name} </h1>
                 </div>
                 <form action="profil.html" method="post">
-                    <TextField hintText="Email" name="mailConnexion" errorText="This field is required"/>
+                    <TextField floatingLabelText="Email" name="mailConnexion" errorText="This field is required"/>
                     <br />
-                    <TextField hintText="Password" name="password" type="password" />
+                    <TextField floatingLabelText="Password" name="password" type="password" />
                     <br />
                     <br />
                     <RaisedButton label="Connexion" onClick={this.props.navig(4)} />

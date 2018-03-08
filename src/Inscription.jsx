@@ -1,51 +1,117 @@
 import React, { Component } from 'react';
-import logo from './data/logo.jpg';
 import './App.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
 import Toggle from 'material-ui/Toggle';
+import Snackbar from 'material-ui/Snackbar';
 
 class Inscription extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nom: "",
+            prenom: "",
+            motDePasse: "",
+            dateNaissance: "",
+            email: "",
+            adresse: "",
+            photo: "",
+            profilPublic: false,
+            localisationPartage: false,
+            listePersonneVisiter: [],
+            interetsMusicaux: [],
+            openSnackbar: false
+        };
+        this.sendRequete = this.sendRequete.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.verifIfEmpty = this.verifIfEmpty.bind(this);
+    }
+
+    sendRequete(a) {   
+        if (this.verifIfEmpty() === false) {
+            console.log("error");
+        } else {
+            console.log("OK");
+            this.setState({ openSnackbar: true, });
+            return fetch('http://localhost:8082/add', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(
+                    {
+                        "nom": this.state.nom,
+                        "prenom": this.state.prenom,
+                        "motDePasse": "",
+                        "dateNaissance": this.state.dateNaissance,
+                        "email": this.state.email,
+                        "adresse": this.state.adresse,
+                        "photo": this.state.photo,
+                        "profilPublic": this.state.profilPublic,
+                        "localisationPartage": this.state.localisationPartage,
+                        "listePersonneVisiter": this.state.listePersonneVisiter,
+                        "interetsMusicaux": this.state.interetsMusicaux
+                    }
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+        }
+
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    verifIfEmpty(e) {
+        // eslint-disable-next-line
+        if (this.state.nom == 0 || this.state.prenom == 0 || this.state.dateNaissance == 0 || this.state.email == 0) { 
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    handleRequestClose = () => {
+        this.setState({ openSnackbar: false, });
+    };
 
     render() {
         return (
-            <form action="profil.html" method="post">
+            <form action="#" method="GET">
                 <div className="blockTitle">
                     <h1> {this.props.name} </h1>
                 </div>
                 <div className="blockInscription">
                     <div className="blockGauche">
-                        <TextField hintText="Nom" name="nomInscription" required />
+                        <TextField floatingLabelText="Nom" name="nom" onChange={this.handleChange} />
                         <br />
-                        <TextField hintText="Prenom" name="prenomInscription" required />
+                        <TextField floatingLabelText="Prenom" name="prenom" onChange={this.handleChange} />
                         <br />
-                        <TextField hintText="Mot de passe" name="motdepasseInscription" type="password" required />
+                        <TextField floatingLabelText="Mot de passe" name="motdepasseInscription" type="password" onChange={this.handleChange} />
                         <br />
-                        <TextField hintText="Email" name="mailInscription" required />
+                        <TextField floatingLabelText="Email" name="email" onChange={this.handleChange} />
                         <br />
                     </div>
                     <div className="blockCentrale">
-                        <TextField hintText="Adresse" name="adresseInscription" required />
+                        <TextField floatingLabelText="Adresse" name="adresse" onChange={this.handleChange} />
                         <br />
-                        <DatePicker hintText="Date de naissane" mode="landscape" />
+                        <TextField floatingLabelText="Date de naissane" name="dateNaissance" onChange={this.handleChange} errorText="format : jj/mm/aaaa" />
+                        {/* <DatePicker hintText="Date de naissane" name="dateNaissance" autoOk="true" mode="landscape" onChange={this.handleChange} /> */}
                         <br />
                         <div className="toggle">
-                            <Toggle label="Compte publique" defaultToggled={true}/>
+                            <Toggle label="Compte publique" name="profilPublic" defaultToggled={false} onChange={this.handleChange} />
                         </div>
                         <br />
                         <div className="toggle">
-                            <Toggle label="Autoriser la localisation" defaultToggled={true}/>
+                            <Toggle label="Autoriser la localisation" name="localisationPartage" defaultToggled={true} onChange={this.handleChange} />
                         </div>
                     </div>
                 </div>
                 <br />
-                <div className="blockButton">
-                    <RaisedButton label="Inscription" onClick={this.props.navig(1)}/>
-                </div>
-                <br />
-                <div>
-                    <img src={logo} className="logoInscription" alt="logo" />
+                <div className="blockButton" >
+                    <RaisedButton label="Inscription" onClick={this.sendRequete} />
+                    <Snackbar open={this.state.openSnackbar} message="Vous etes inscrit" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
                 </div>
             </form >
         )
