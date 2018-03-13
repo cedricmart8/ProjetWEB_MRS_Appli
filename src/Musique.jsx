@@ -46,7 +46,6 @@ class Musique extends Component {
 
 
     render() {
-        console.log(JSON.parse(sessionStorage.user).email);
         
 
         let musique = this.state.musique.map((musique) => {
