@@ -10,6 +10,7 @@ import Home from './Home';
 import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import Musique from './Musique'
 let res;
 
 class App extends Component {
@@ -45,6 +46,8 @@ class App extends Component {
       res = <MyProfil name="MyProfil" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 5) {
       res = <Home name="Home" navig={this.handleClick} />
+    } else if (parseInt(this.state.navigation, 10) === 6) {
+      res = <Musique name="Musique" navig={this.handleClick} />
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
     }
@@ -61,6 +64,7 @@ class App extends Component {
                 <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
                 <MenuItem onClick={this.handleClick(4)}>MyProfil</MenuItem>
                 <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
+                <MenuItem onClick={this.handleClick(6)}>Musique</MenuItem>
               </Drawer>
             </div>
             <div className="imgHeader">

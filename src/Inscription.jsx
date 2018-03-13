@@ -20,7 +20,8 @@ class Inscription extends Component {
             localisationPartage: false,
             listePersonneVisiter: [],
             interetsMusicaux: [],
-            openSnackbar: false
+            openSnackbar: false,
+            openSnackbar2: false
         };
         this.sendRequete = this.sendRequete.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -30,6 +31,7 @@ class Inscription extends Component {
     sendRequete(a) {   
         if (this.verifIfEmpty() === false) {
             console.log("error");
+            this.setState({ openSnackbar2: true, });
         } else {
             console.log("OK");
             this.setState({ openSnackbar: true, });
@@ -40,7 +42,7 @@ class Inscription extends Component {
                     {
                         "nom": this.state.nom,
                         "prenom": this.state.prenom,
-                        "motDePasse": "",
+                        "motDePasse": this.state.motDePasse,
                         "dateNaissance": this.state.dateNaissance,
                         "email": this.state.email,
                         "adresse": this.state.adresse,
@@ -73,10 +75,12 @@ class Inscription extends Component {
     }
 
     handleRequestClose = () => {
-        this.setState({ openSnackbar: false, });
+        this.setState({ openSnackbar: false, openSnackbar2: false});
     };
 
     render() {
+        console.log(this.state.motDePasse);
+        
         return (
             <form action="#" method="GET">
                 <div className="blockTitle">
@@ -88,7 +92,7 @@ class Inscription extends Component {
                         <br />
                         <TextField floatingLabelText="Prenom" name="prenom" onChange={this.handleChange} />
                         <br />
-                        <TextField floatingLabelText="Mot de passe" name="motdepasseInscription" type="password" onChange={this.handleChange} />
+                        <TextField floatingLabelText="Mot de passe" name="motDePasse" type="password" onChange={this.handleChange} />
                         <br />
                         <TextField floatingLabelText="Email" name="email" onChange={this.handleChange} />
                         <br />
@@ -112,6 +116,7 @@ class Inscription extends Component {
                 <div className="blockButton" >
                     <RaisedButton label="Inscription" onClick={this.sendRequete} />
                     <Snackbar open={this.state.openSnackbar} message="Vous etes inscrit" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
+                    <Snackbar open={this.state.openSnackbar2} message="Manque un champ" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
                 </div>
             </form >
         )

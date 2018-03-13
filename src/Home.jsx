@@ -15,125 +15,64 @@ const MyMapComponent = compose(
 )(props => (
     <GoogleMap defaultZoom={14} defaultCenter={{ lat: 47.214262, lng: -1.551431 }}>
         <Marker position={{ lat: 47.214262, lng: -1.551431 }} />
-        <Marker position={{ lat: 47.204105, lng: -1.543529 }} />        
+        <Marker position={{ lat: 47.204105, lng: -1.543529 }} />
         <Marker position={{ lat: 47.201667, lng: -1.572221 }} />
     </GoogleMap>
 ));
 
-const tableData = [
-    {
-        name: 'John Smith',
-        status: 'Employed',
-    },
-    {
-        name: 'Randal White',
-        status: 'Unemployed',
-    },
-    {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-    },
-    {
-        name: 'Steve Brown',
-        status: 'Employed',
-    },
-    {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-    },
-    {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-];
-
 class Home extends Component {
+
+    state = {
+        fixedHeader: true,
+        showRowHover: false,
+        selectable: true,
+        showCheckboxes: false,
+        height: '300px',
+        user: []
+    };
+
+    componentDidMount() {
+        console.log("test");
+        fetch('http://localhost:8082/allPersonne', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(results => {
+            return results.json();
+        }).then(data => {
+            this.setState({ user: data });
+        })
+    }
 
 
     render() {
         return (
             <div className="blockHome">
-                <div className="blockTitle">
-                    <h1> {this.props.name} </h1>
-                </div>
                 <br />
                 <div className="block1Home">
                     <div className="block3Home">
-                        <Table height="400px" fixedHeader="true" selectable="true">
-                            <TableHeader adjustForCheckbox="false">
+                        <Table height="400px" fixedHeader={this.state.fixedHeader} selectable={this.state.selectable}>
+                            <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes}>
                                 <TableRow>
-                                    <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{ textAlign: 'center' }}>
+                                    <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: 'center' }}>
                                         Personne Visiter
                                     </TableHeaderColumn>
                                 </TableRow>
                                 <TableRow>
-                                    <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-                                    <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                                    <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Nom">Nom</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Prenom">Prenom</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Age">Age</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
-                            <TableBody>
-                                {tableData.map((row, index) => (
+                            <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                                {this.state.user.map((row, index) => (
                                     <TableRow key={index}>
                                         <TableRowColumn>{index}</TableRowColumn>
-                                        <TableRowColumn>{row.name}</TableRowColumn>
-                                        <TableRowColumn>{row.status}</TableRowColumn>
+                                        <TableRowColumn>{row.nom}</TableRowColumn>
+                                        <TableRowColumn>{row.prenom}</TableRowColumn>
+                                        <TableRowColumn>{row.age}</TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -141,25 +80,27 @@ class Home extends Component {
                     </div>
                     <MyMapComponent isMarkerShown />
                     <div className="block2Home">
-                        <Table height="300px" fixedHeader="true" selectable="true">
-                            <TableHeader adjustForCheckbox="false">
+                        <Table height="300px" fixedHeader={this.state.fixedHeader} selectable={this.state.selectable}   >
+                            <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes}>
                                 <TableRow>
-                                    <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{ textAlign: 'center' }}>
+                                    <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: 'center' }}>
                                         Personne Proche
                                     </TableHeaderColumn>
                                 </TableRow>
                                 <TableRow>
-                                    <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-                                    <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                                    <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Nom">Nom</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Prenom">Prenom</TableHeaderColumn>
+                                    <TableHeaderColumn tooltip="Age">Age</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
-                            <TableBody>
-                                {tableData.map((row, index) => (
+                            <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                                {this.state.user.map((row, index) => (
                                     <TableRow key={index}>
                                         <TableRowColumn>{index}</TableRowColumn>
-                                        <TableRowColumn>{row.name}</TableRowColumn>
-                                        <TableRowColumn>{row.status}</TableRowColumn>
+                                        <TableRowColumn>{row.nom}</TableRowColumn>
+                                        <TableRowColumn>{row.prenom}</TableRowColumn>
+                                        <TableRowColumn>{row.age}</TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>
