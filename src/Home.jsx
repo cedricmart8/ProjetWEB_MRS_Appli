@@ -21,15 +21,18 @@ const MyMapComponent = compose(
 ));
 
 class Home extends Component {
-
-    state = {
-        fixedHeader: true,
-        showRowHover: false,
-        selectable: true,
-        showCheckboxes: false,
-        height: '300px',
-        user: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            fixedHeader: true,
+            showRowHover: false,
+            selectable: true,
+            showCheckboxes: false,
+            height: '300px',
+            email: "",
+            user: []
+        };
+    }
 
     componentDidMount() {
         console.log("test");
@@ -45,8 +48,25 @@ class Home extends Component {
         })
     }
 
+    handleSubmit(e) {
+        console.log("e : " + e);
 
-    render() {
+        fetch('http://localhost:8082/addGenreMusical', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'email': JSON.parse(sessionStorage.user).email,
+                'idGenreMusical': this.state.idGenreMusical
+            }
+        }).then(results => {
+            return results;
+        }).then(data => {
+            return "test";
+        })
+    }
+
+
+    render() {        
         return (
             <div className="blockHome">
                 <br />
@@ -95,14 +115,16 @@ class Home extends Component {
                                 </TableRow>
                             </TableHeader>
                             <TableBody displayRowCheckbox={this.state.showCheckboxes}>
-                                {this.state.user.map((row, index) => (
+                                {this.state.user.map((row, index) => {
+                                    // this.setState({email: row.email});
+                                    return (
                                     <TableRow key={index}>
                                         <TableRowColumn>{index}</TableRowColumn>
                                         <TableRowColumn>{row.nom}</TableRowColumn>
                                         <TableRowColumn>{row.prenom}</TableRowColumn>
                                         <TableRowColumn>{row.age}</TableRowColumn>
                                     </TableRow>
-                                ))}
+                                )})}
                             </TableBody>
                         </Table>
                     </div>

@@ -3,13 +3,15 @@ import './App.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+let error;
+
 class Connexion extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: "",
             mdp: "",
-            result: ""
+            result: 0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,31 +27,38 @@ class Connexion extends Component {
                 'mdp': this.state.mdp
             }
         }).then(results => {
-            console.log(results);
-            
-            return results;
+            return results.json();
         }).then(data => {
-            console.log(data.body);
-            
-            this.setState({ result: data.body });
+            this.setState({ result: data });
         })
+
     }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    render() {    
-        console.log("email : " + this.state.email + "  |  mdp : " + this.state.mdp);
-        console.log("result : " + this.state.result);
-        
-        
+    render() {
+        if (this.state.result === null) {
+            error = <p className="messageInscription" style={{ backgroundColor: "#F44336" }}>Email ou mot de passe incorrecte</p>
+            sessionStorage.setItem("isUserLogged", false);
+        } else if (this.state.result === 0) {
+            sessionStorage.clear();
+            error = null;
+        } else if (this.state.result !== null) {
+            error = <p className="messageInscription" style={{ backgroundColor: "#4CAF50" }}>Correct</p>
+            sessionStorage.setItem("isUserLogged", true);
+            sessionStorage.setItem("user", JSON.stringify(this.state.result));
+            sessionStorage.setItem('navigation', 6);
+            window.location.reload();                        
+        }        
         return (
             <div className="blockConnexion">
                 <div className="blockTitle">
                     <h1> {this.props.name} </h1>
                 </div>
                 <form action="profil.html" method="post">
+                    {error}
                     <TextField floatingLabelText="Email" name="email" onChange={this.handleChange} errorText="Obligatoire" />
                     <br />
                     <TextField floatingLabelText="Password" name="mdp" onChange={this.handleChange} type="password" errorText="Obligatoire" />

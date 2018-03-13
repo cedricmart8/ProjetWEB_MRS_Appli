@@ -18,8 +18,6 @@ class Inscription extends Component {
             photo: "",
             profilPublic: false,
             localisationPartage: false,
-            listePersonneVisiter: [],
-            interetsMusicaux: [],
             openSnackbar: false,
             openSnackbar2: false
         };
@@ -28,7 +26,7 @@ class Inscription extends Component {
         this.verifIfEmpty = this.verifIfEmpty.bind(this);
     }
 
-    sendRequete(a) {   
+    sendRequete(a) {
         if (this.verifIfEmpty() === false) {
             console.log("error");
             this.setState({ openSnackbar2: true, });
@@ -49,8 +47,13 @@ class Inscription extends Component {
                         "photo": this.state.photo,
                         "profilPublic": this.state.profilPublic,
                         "localisationPartage": this.state.localisationPartage,
-                        "listePersonneVisiter": this.state.listePersonneVisiter,
-                        "interetsMusicaux": this.state.interetsMusicaux
+                        "listePersonneVisiter": [0],
+                        "interetsMusicaux": [{
+                            "_id": 144,
+                            "className": "iut.nantes.projetMRS.entity.EntityGenreMusic",
+                            "name": "\"Reggae\"",
+                            "picture": "\"https://api.deezer.com/genre/144/image\""
+                        }]
                     }
                 ),
                 headers: {
@@ -67,7 +70,7 @@ class Inscription extends Component {
 
     verifIfEmpty(e) {
         // eslint-disable-next-line
-        if (this.state.nom == 0 || this.state.prenom == 0 || this.state.dateNaissance == 0 || this.state.email == 0) { 
+        if (this.state.nom == 0 || this.state.prenom == 0 || this.state.dateNaissance == 0 || this.state.email == 0) {
             return false;
         } else {
             return true;
@@ -75,12 +78,10 @@ class Inscription extends Component {
     }
 
     handleRequestClose = () => {
-        this.setState({ openSnackbar: false, openSnackbar2: false});
+        this.setState({ openSnackbar: false, openSnackbar2: false });
     };
 
     render() {
-        console.log(this.state.motDePasse);
-        
         return (
             <form action="#" method="GET">
                 <div className="blockTitle">

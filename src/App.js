@@ -36,7 +36,7 @@ class App extends Component {
     }
   }
 
-  render() {
+  render() {    
     console.log("navigation : " + this.state.navigation);
     if (parseInt(this.state.navigation, 10) === 2) {
       res = <Inscription name="Inscription" navig={this.handleClick} />
@@ -68,7 +68,7 @@ class App extends Component {
               </Drawer>
             </div>
             <div className="imgHeader">
-            <img src={logo} className="App-logo" alt="logo" />
+              <img src={logo} className="App-logo" alt="logo" />
             </div>
           </header>
           {res}

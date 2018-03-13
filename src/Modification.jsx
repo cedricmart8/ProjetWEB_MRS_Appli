@@ -73,19 +73,19 @@ class Modification extends Component {
                 </div>
                 <div className="blockInscription">
                     <div className="blockGauche">
-                        <TextField floatingLabelText="Nom" defaultValue={this.state.nom} onChange={this.handleChange} name="nom" />
+                        <TextField floatingLabelText="Nom" defaultValue={JSON.parse(sessionStorage.user).nom} onChange={this.handleChange} name="nom" />
                         <br />
-                        <TextField floatingLabelText="Prenom" defaultValue={this.state.prenom} onChange={this.handleChange} name="prenom" />
+                        <TextField floatingLabelText="Prenom" defaultValue={JSON.parse(sessionStorage.user).prenom} onChange={this.handleChange} name="prenom" />
                         <br />
-                        <TextField floatingLabelText="Mot de passe" defaultValue={this.state.motDePasse} name="motDePasse" onChange={this.handleChange} type="password" />
+                        <TextField floatingLabelText="Mot de passe" defaultValue={JSON.parse(sessionStorage.user).motDePasse} name="motDePasse" onChange={this.handleChange} type="password" />
                         <br />
-                        <TextField floatingLabelText="Email" name="email" defaultValue={this.state.email} onChange={this.handleChange} />
+                        <TextField floatingLabelText="Email" name="email" defaultValue={JSON.parse(sessionStorage.user).email} onChange={this.handleChange} />
                         <br />
                     </div>
                     <div className="blockCentrale">
-                        <TextField floatingLabelText="Adresse" name="adresse" defaultValue={this.state.adresse} onChange={this.handleChange} />
+                        <TextField floatingLabelText="Adresse" name="adresse" defaultValue={JSON.parse(sessionStorage.user).adresse} onChange={this.handleChange} />
                         <br />
-                        <TextField floatingLabelText="Date de naissane" name="dateNaissance" defaultValue={this.state.dateNaissance} onChange={this.handleChange} errorText="format : jj/mm/aaaa" />
+                        <TextField floatingLabelText="Date de naissane" name="dateNaissance" defaultValue={JSON.parse(sessionStorage.user).dateNaissance} onChange={this.handleChange} errorText="format : jj/mm/aaaa" />
                         {/* <DatePicker floatingLabelText="Date de naissane" mode="landscape" defaultValue={this.state.dateNaissance}/> */}
                         <br />
                         <div className="toggle">

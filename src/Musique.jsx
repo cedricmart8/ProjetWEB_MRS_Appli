@@ -30,26 +30,28 @@ class Musique extends Component {
         console.log("e : " + e);
         this.setState({ idGenreMusical: e });
 
-        // fetch('http://localhost:8082/addGenreMusical', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'email': this.state.email,
-        //         'idGenreMusical': this.state.idGenreMusical
-        //     }
-        // }).then(results => {
-        //     return results;
-        // }).then(data => {
-        //     return "test";
-        // })
+        fetch('http://localhost:8082/addGenreMusical', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'email': JSON.parse(sessionStorage.user).email,
+                'idGenreMusical': this.state.idGenreMusical
+            }
+        }).then(results => {
+            return results;
+        }).then(data => {
+            return "test";
+        })
     }
 
 
     render() {
+        console.log(JSON.parse(sessionStorage.user).email);
+        
 
         let musique = this.state.musique.map((musique) => {
             return (
-                <div className="buttonGenreMusique" onClick={this.handleSubmit.bind(this, musique.name)} style={{ backgroundImage: `url(${musique.picture})` }}>
+                <div className="buttonGenreMusique" onClick={this.handleSubmit.bind(this, musique._id)} style={{ backgroundImage: `url(${musique.picture})` }}>
                     <p style={{ marginTop: "40px", fontSize: "24px" }}>{musique.name.replace("\"", "").replace("\"", "")}</p>
                 </div>
             )
