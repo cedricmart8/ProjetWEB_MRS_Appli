@@ -33,7 +33,7 @@ class Inscription extends Component {
         } else {
             console.log("OK");
             this.setState({ openSnackbar: true, });
-            fetch('http://localhost:8082/add', {
+            fetch('http://172.17.0.24:8082/add', {
                 method: 'POST',
                 mode: 'no-cors',
                 body: JSON.stringify(

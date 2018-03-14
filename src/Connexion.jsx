@@ -19,7 +19,7 @@ class Connexion extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:8082/connexion', {
+        fetch('http://172.17.0.24:8082/connexion', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
