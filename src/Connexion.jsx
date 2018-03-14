@@ -43,7 +43,7 @@ class Connexion extends Component {
             error = <p className="messageInscription" style={{ backgroundColor: "#F44336" }}>Email ou mot de passe incorrecte</p>
             sessionStorage.setItem("isUserLogged", false);
         } else if (this.state.result === 0) {
-            sessionStorage.clear();
+            // sessionStorage.clear();
             error = null;
         } else if (this.state.result !== null) {
             error = <p className="messageInscription" style={{ backgroundColor: "#4CAF50" }}>Correct</p>
