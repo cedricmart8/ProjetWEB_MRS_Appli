@@ -3,6 +3,7 @@ import './App.css';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, } from 'material-ui/Table';
+let localisationUser;
 
 const MyMapComponent = compose(
     withProps({
@@ -16,7 +17,7 @@ const MyMapComponent = compose(
     <GoogleMap defaultZoom={14} defaultCenter={{ lat: 47.214262, lng: -1.551431 }}>
         <Marker position={{ lat: 47.214262, lng: -1.551431 }} />
         <Marker position={{ lat: 47.204105, lng: -1.543529 }} />
-        <Marker position={{ lat: 47.201667, lng: -1.572221 }} />
+        {localisationUser}
     </GoogleMap>
 ));
 
@@ -66,7 +67,16 @@ class Home extends Component {
     }
 
 
-    render() {        
+    render() { 
+        
+        
+        localisationUser = this.state.user.map((user) => {
+            console.log(user.nom + "  :  " + user.localisation);
+            return (
+                null
+                // <Marker position={{ lat: user.localisation.latitude, lng: user.localisation.longitude }} />
+            )
+        });       
         return (
             <div className="blockHome">
                 <br />
