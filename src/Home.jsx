@@ -17,7 +17,6 @@ const MyMapComponent = compose(
     }), withScriptjs, withGoogleMap
 )(props => (
     <GoogleMap defaultZoom={14} defaultCenter={{ lat: 47.214262, lng: -1.551431 }}>
-        <Marker position={{ lat: 47.214262, lng: -1.551431 }} />
         {localisationUser}
     </GoogleMap>
 ));
@@ -67,6 +66,10 @@ class Home extends Component {
         })
     }
 
+    test(e){
+        console.log(e);
+    }
+
 
     render() {
 
@@ -77,7 +80,7 @@ class Home extends Component {
                 latitude = Object.values(user.localisation)[0];
                 longitude = Object.values(user.localisation)[1];
                 return (
-                    <Marker position={{ lat: latitude, lng: longitude}} />
+                    <Marker onClick={this.test.bind(this, user.email)} label={user.nom} position={{ lat: latitude, lng: longitude}} />
                 )            
         });
         return (
@@ -112,7 +115,7 @@ class Home extends Component {
                         </Table>
                     </div>
                     <MyMapComponent isMarkerShown />
-                    <div className="block2Home">
+                    {/* <div className="block2Home">
                         <Table height="300px" fixedHeader={this.state.fixedHeader} selectable={this.state.selectable}   >
                             <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes}>
                                 <TableRow>
@@ -141,7 +144,7 @@ class Home extends Component {
                                 })}
                             </TableBody>
                         </Table>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

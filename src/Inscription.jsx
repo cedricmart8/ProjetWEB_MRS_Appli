@@ -16,8 +16,8 @@ class Inscription extends Component {
             email: "",
             adresse: "",
             photo: "",
-            profilPublic: false,
-            localisationPartage: false,
+            profilPublic: true,
+            localisationPartage: true,
             openSnackbar: false,
             openSnackbar2: false
         };
@@ -55,8 +55,8 @@ class Inscription extends Component {
                             "picture": "\"https://api.deezer.com/genre/144/image\""
                         }],
                         "localisation": {
-                            "latitude": 47.221968,
-                            "longitude": -1.546156
+                            "latitude": 47.201098,
+                            "longitude": -1.572786
                         }
                     }
                 ),
@@ -112,7 +112,7 @@ class Inscription extends Component {
                         {/* <DatePicker hintText="Date de naissane" name="dateNaissance" autoOk="true" mode="landscape" onChange={this.handleChange} /> */}
                         <br />
                         <div className="toggle">
-                            <Toggle label="Compte publique" name="profilPublic" defaultToggled={false} onChange={this.handleChange} />
+                            <Toggle label="Compte publique" name="profilPublic" defaultToggled={true} onChange={this.handleChange} />
                         </div>
                         <br />
                         <div className="toggle">
