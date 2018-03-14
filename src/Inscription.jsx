@@ -33,7 +33,7 @@ class Inscription extends Component {
         } else {
             console.log("OK");
             this.setState({ openSnackbar: true, });
-            return fetch('http://localhost:8082/add', {
+            return fetch('https://lp-miar-groupe04-iutmmigrenoble.c9users.io:8082/add', {
                 method: 'POST',
                 mode: 'no-cors',
                 body: JSON.stringify(
