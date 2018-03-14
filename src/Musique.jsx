@@ -64,7 +64,7 @@ class Musique extends Component {
                     {musique}
                 </div>
                 <br />
-                <RaisedButton label="OK" onClick={this.props.navig(2)} />
+                <RaisedButton label="OK" onClick={this.props.navig(5)} />
                 <br />
             </div>
         )
