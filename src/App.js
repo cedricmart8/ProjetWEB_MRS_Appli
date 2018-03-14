@@ -52,6 +52,7 @@ class App extends Component {
     } else if (parseInt(this.state.navigation, 10) === 7) {
       sessionStorage.clear();
       this.handleClick(1);
+      window.location.reload();
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
     }
