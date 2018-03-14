@@ -5,13 +5,14 @@ import Connexion from './Connexion.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Inscription from './Inscription.jsx';
 import Modification from './Modification';
-import MyProfil from './MyProfil';
+import Profil from './Profil';
 import Home from './Home';
 import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Musique from './Musique'
 let res;
+let menu;
 
 class App extends Component {
 
@@ -36,20 +37,31 @@ class App extends Component {
     }
   }
 
-  render() {    
+  render() {
     console.log("navigation : " + this.state.navigation);
     if (parseInt(this.state.navigation, 10) === 2) {
       res = <Inscription name="Inscription" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 3) {
       res = <Modification name="Modification" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 4) {
-      res = <MyProfil name="MyProfil" navig={this.handleClick} />
+      res = <Profil name="Profil" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 5) {
       res = <Home name="Home" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 6) {
       res = <Musique name="Musique" navig={this.handleClick} />
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
+    }
+
+    if (sessionStorage.user == null) {
+      menu = <div><MenuItem onClick={this.handleClick(1)}>Connexion</MenuItem>
+        <MenuItem onClick={this.handleClick(2)}>Inscription</MenuItem></div>
+    } else {
+      menu = <div><MenuItem onClick={this.handleClick(1)}>Deconnexion</MenuItem>
+        <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
+        <MenuItem onClick={this.handleClick(4)}>Profil</MenuItem>
+        <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
+        <MenuItem onClick={this.handleClick(6)}>Musique</MenuItem></div>
     }
     return (
       <MuiThemeProvider>
@@ -59,12 +71,8 @@ class App extends Component {
               <RaisedButton label="Menu" onClick={this.handleToggle} className="App-Menu" />
               <Drawer open={this.state.open}>
                 <RaisedButton label="Close" onClick={this.handleToggleClose} className="buttonMenu" />
-                <MenuItem onClick={this.handleClick(1)}>Connexion</MenuItem>
-                <MenuItem onClick={this.handleClick(2)}>Inscription</MenuItem>
-                <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
-                <MenuItem onClick={this.handleClick(4)}>MyProfil</MenuItem>
-                <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
-                <MenuItem onClick={this.handleClick(6)}>Musique</MenuItem>
+
+                {menu}
               </Drawer>
             </div>
             <div className="imgHeader">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class MyProfil extends Component {
+class Profil extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,4 +38,4 @@ class MyProfil extends Component {
         )
     }
 };
-export default MyProfil;
+export default Profil;

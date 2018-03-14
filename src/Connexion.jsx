@@ -19,7 +19,7 @@ class Connexion extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('https://lp-miar-groupe04-iutmmigrenoble.c9users.io:8082/connexion', {
+        fetch('http://localhost:8082/connexion', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
