@@ -49,6 +49,9 @@ class App extends Component {
       res = <Home name="Home" navig={this.handleClick} />
     } else if (parseInt(this.state.navigation, 10) === 6) {
       res = <Musique name="Musique" navig={this.handleClick} />
+    } else if (parseInt(this.state.navigation, 10) === 7) {
+      sessionStorage.clear();
+      this.handleClick(1);
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
     }
@@ -57,7 +60,7 @@ class App extends Component {
       menu = <div><MenuItem onClick={this.handleClick(1)}>Connexion</MenuItem>
         <MenuItem onClick={this.handleClick(2)}>Inscription</MenuItem></div>
     } else {
-      menu = <div><MenuItem onClick={this.handleClick(1)}>Deconnexion</MenuItem>
+      menu = <div><MenuItem onClick={this.handleClick(7)}>Deconnexion</MenuItem>
         <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
         <MenuItem onClick={this.handleClick(4)}>Profil</MenuItem>
         <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
