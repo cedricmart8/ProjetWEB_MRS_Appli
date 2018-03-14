@@ -64,7 +64,6 @@ class Inscription extends Component {
                     'Content-Type': 'application/json',
                 }
             })
-
             sessionStorage.setItem('navigation', 1);
             return window.location.reload();
             // return null;

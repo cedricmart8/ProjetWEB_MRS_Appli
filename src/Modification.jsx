@@ -31,10 +31,10 @@ class Modification extends Component {
     sendRequete(a) {
         console.log("OK");
         this.setState({ openSnackbar: true, });
-        return fetch('http://localhost:8082/modifUser', {
+        fetch('http://localhost:8082/modifUser', {
             method: 'PUT',
             headers: {
-                'email': 'cedricmart8@gmail.com',
+                'email': JSON.parse(sessionStorage.user).email,
                 'nom': this.state.nom,
                 'prenom': this.state.prenom,
                 'dateNaissance': this.state.dateNaissance,
@@ -44,17 +44,33 @@ class Modification extends Component {
                 'profilPublic': this.state.profilPublic
             }
         })
+        fetch('http://localhost:8082/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'email': JSON.parse(sessionStorage.user).email
+            }
+        }).then(results => {
+            return results.json();
+        }).then(data => {
+            sessionStorage.setItem('user',  JSON.stringify(data));
+        })
+        sessionStorage.setItem('navigation', 5);
+        return window.location.reload();
+        // return null;
     }
 
     deleteUser(a) {
         console.log("OK");
         this.setState({ openSnackbar2: true, });
-        return fetch('http://localhost:8082/deleteUser', {
+        fetch('http://localhost:8082/deleteUser', {
             method: 'DELETE',
             headers: {
-                'email': 'sam@lmzkf.zf'
+                'email': JSON.parse(sessionStorage.user).email
             }
         })
+        sessionStorage.setItem('navigation', 1);
+        return window.location.reload();
     }
 
     handleChange(event) {
@@ -62,7 +78,7 @@ class Modification extends Component {
     }
 
     handleRequestClose = () => {
-        this.setState({ openSnackbar: false, openSnackbar2: false});
+        this.setState({ openSnackbar: false, openSnackbar2: false });
     };
 
     render() {

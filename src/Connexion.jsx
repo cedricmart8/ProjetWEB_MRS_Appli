@@ -31,7 +31,6 @@ class Connexion extends Component {
         }).then(data => {
             this.setState({ result: data });
         })
-
     }
 
     handleChange(event) {
