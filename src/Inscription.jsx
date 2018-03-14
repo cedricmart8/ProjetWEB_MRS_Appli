@@ -53,16 +53,21 @@ class Inscription extends Component {
                             "className": "iut.nantes.projetMRS.entity.EntityGenreMusic",
                             "name": "\"Reggae\"",
                             "picture": "\"https://api.deezer.com/genre/144/image\""
-                        }]
+                        }],
+                        "localisation": {
+                            "latitude": 47.221968,
+                            "longitude": -1.546156
+                        }
                     }
                 ),
                 headers: {
                     'Content-Type': 'application/json',
                 }
             })
-            
+
             sessionStorage.setItem('navigation', 1);
             return window.location.reload();
+            // return null;
         }
 
     }

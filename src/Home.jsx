@@ -4,6 +4,8 @@ import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, } from 'material-ui/Table';
 let localisationUser;
+let latitude;
+let longitude;
 
 const MyMapComponent = compose(
     withProps({
@@ -16,7 +18,6 @@ const MyMapComponent = compose(
 )(props => (
     <GoogleMap defaultZoom={14} defaultCenter={{ lat: 47.214262, lng: -1.551431 }}>
         <Marker position={{ lat: 47.214262, lng: -1.551431 }} />
-        <Marker position={{ lat: 47.204105, lng: -1.543529 }} />
         {localisationUser}
     </GoogleMap>
 ));
@@ -67,16 +68,18 @@ class Home extends Component {
     }
 
 
-    render() { 
-        
-        
+    render() {
+
+
         localisationUser = this.state.user.map((user) => {
-            console.log(user.nom + "  :  " + user.localisation);
-            return (
-                null
-                // <Marker position={{ lat: user.localisation.latitude, lng: user.localisation.longitude }} />
-            )
-        });       
+                console.log(user.nom + "  :  " + user.localisation);
+                console.log(Object.values(user.localisation)[0]);
+                latitude = Object.values(user.localisation)[0];
+                longitude = Object.values(user.localisation)[1];
+                return (
+                    <Marker position={{ lat: latitude, lng: longitude}} />
+                )            
+        });
         return (
             <div className="blockHome">
                 <br />
@@ -128,13 +131,14 @@ class Home extends Component {
                                 {this.state.user.map((row, index) => {
                                     // this.setState({email: row.email});
                                     return (
-                                    <TableRow key={index}>
-                                        <TableRowColumn>{index}</TableRowColumn>
-                                        <TableRowColumn>{row.nom}</TableRowColumn>
-                                        <TableRowColumn>{row.prenom}</TableRowColumn>
-                                        <TableRowColumn>{row.age}</TableRowColumn>
-                                    </TableRow>
-                                )})}
+                                        <TableRow key={index}>
+                                            <TableRowColumn>{index}</TableRowColumn>
+                                            <TableRowColumn>{row.nom}</TableRowColumn>
+                                            <TableRowColumn>{row.prenom}</TableRowColumn>
+                                            <TableRowColumn>{row.age}</TableRowColumn>
+                                        </TableRow>
+                                    )
+                                })}
                             </TableBody>
                         </Table>
                     </div>
