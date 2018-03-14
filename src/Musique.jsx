@@ -30,7 +30,7 @@ class Musique extends Component {
         console.log("e : " + e);
         this.setState({ idGenreMusical: e });
 
-        fetch('http://172.17.0.24:8082/addGenreMusical', {
+        fetch('http://localhost:8082/addGenreMusical', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

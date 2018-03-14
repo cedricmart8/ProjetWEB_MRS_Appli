@@ -19,7 +19,7 @@ class Connexion extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('http://172.17.0.24:8082/connexion', {
+        fetch('http://localhost:8082/connexion', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,19 +39,20 @@ class Connexion extends Component {
     }
 
     render() {
+        console.log(this.state.result);
         if (this.state.result === null) {
             error = <p className="messageInscription" style={{ backgroundColor: "#F44336" }}>Email ou mot de passe incorrecte</p>
             sessionStorage.setItem("isUserLogged", false);
         } else if (this.state.result === 0) {
-            // sessionStorage.clear();
             error = null;
         } else if (this.state.result !== null) {
             error = <p className="messageInscription" style={{ backgroundColor: "#4CAF50" }}>Correct</p>
             sessionStorage.setItem("isUserLogged", true);
             sessionStorage.setItem("user", JSON.stringify(this.state.result));
             sessionStorage.setItem('navigation', 6);
-            window.location.reload();                        
-        }        
+            window.location.reload();
+        } 
+        
         return (
             <div className="blockConnexion">
                 <div className="blockTitle">
