@@ -19,7 +19,9 @@ class Inscription extends Component {
             profilPublic: true,
             localisationPartage: true,
             openSnackbar: false,
-            openSnackbar2: false
+            openSnackbar2: false,
+            latitude: 0,
+            longitude: 0
         };
         this.sendRequete = this.sendRequete.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -31,42 +33,59 @@ class Inscription extends Component {
             console.log("error");
             this.setState({ openSnackbar2: true, });
         } else {
+            // await sleep(5000);
             console.log("OK");
             this.setState({ openSnackbar: true, });
-            fetch('http://localhost:8082/add', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(
-                    {
-                        "nom": this.state.nom,
-                        "prenom": this.state.prenom,
-                        "motDePasse": this.state.motDePasse,
-                        "dateNaissance": this.state.dateNaissance,
-                        "email": this.state.email,
-                        "adresse": this.state.adresse,
-                        "photo": this.state.photo,
-                        "profilPublic": this.state.profilPublic,
-                        "localisationPartage": this.state.localisationPartage,
-                        "listePersonneVisiter": [0],
-                        "interetsMusicaux": [{
-                            "_id": 144,
-                            "className": "iut.nantes.projetMRS.entity.EntityGenreMusic",
-                            "name": "\"Reggae\"",
-                            "picture": "\"https://api.deezer.com/genre/144/image\""
-                        }],
-                        "localisation": {
-                            "latitude": 47.201098,
-                            "longitude": -1.572786
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    this.setState({
+                        latitude: pos.lat,
+                        longitude: pos.lng
+                    })
+                    console.log("latitude : " + pos.lat + "  | lng  : " + pos.lng);
+                    fetch('http://localhost:8082/add', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: JSON.stringify(
+                            {
+                                "nom": this.state.nom,
+                                "prenom": this.state.prenom,
+                                "motDePasse": this.state.motDePasse,
+                                "dateNaissance": this.state.dateNaissance,
+                                "email": this.state.email,
+                                "adresse": this.state.adresse,
+                                "photo": this.state.photo,
+                                "profilPublic": this.state.profilPublic,
+                                "localisationPartage": this.state.localisationPartage,
+                                "listePersonneVisiter": [0],
+                                "interetsMusicaux": [{
+                                    "_id": 0,
+                                    "className": "iut.nantes.projetMRS.entity.EntityGenreMusic",
+                                    "name": "\"test\"",
+                                    "picture": "\"https://test\""
+                                }],
+                                "localisation": {
+                                    "latitude": this.state.latitude,
+                                    "longitude": this.state.longitude
+                                }
+                            }
+                        ),
+                        headers: {
+                            'Content-Type': 'application/json',
                         }
-                    }
-                ),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            sessionStorage.setItem('navigation', 1);
-            return window.location.reload();
-            // return null;
+                    })
+                    sessionStorage.setItem('navigation', 1);
+                    return window.location.reload();
+                    // return null;
+                });
+
+            }
+
+
         }
 
     }
