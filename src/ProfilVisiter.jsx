@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
+let commun;
 
 class ProfilVisiter extends Component {
     constructor(props) {
@@ -26,7 +27,18 @@ class ProfilVisiter extends Component {
     }
 
     render() {
-        let user = this.state.user.map((user) => {
+        let user = this.state.user.map((user) => { 
+            commun = JSON.parse(sessionStorage.user).interetsMusicaux.map((commun) => {                
+                if (commun.name === user.name) {
+                    return (
+                        <div className="buttonGenreMusiqueCommun" style={{ backgroundImage: `url(${commun.picture})` }}>
+                            <p style={{ marginTop: "40px", fontSize: "24px" }}>{commun.name.replace("\"", "").replace("\"", "")}</p>
+                        </div>
+                    )
+                } else {
+                    return null
+                }
+            });
             return (
                 <div className="buttonGenreMusique" style={{ backgroundImage: `url(${user.picture})` }}>
                     <p style={{ marginTop: "40px", fontSize: "24px" }}>{user.name.replace("\"", "").replace("\"", "")}</p>
@@ -36,7 +48,7 @@ class ProfilVisiter extends Component {
         return (
             <form action="profil.html" method="post">
                 <div className="blockTitle">
-                    <h1> {this.props.name} </h1>
+                    <h1> Profil de {JSON.parse(sessionStorage.userVisiter).nom} </h1>
                 </div>
                 <div className="blockMyProfil">
                     <div className="block2">
@@ -48,9 +60,12 @@ class ProfilVisiter extends Component {
                         <h2 style={{ margin: "10px" }}>Adresse : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).adresse}</p>
                     </div>
                 </div>
-                <Divider />
                 <div className="tableauListGenre">
                     {user}
+                </div>
+                <h1>Genre musical en commun</h1>
+                <div className="tableauListGenre">
+                    {commun}
                 </div>
                 <br />
                 <div className="blockButton">
