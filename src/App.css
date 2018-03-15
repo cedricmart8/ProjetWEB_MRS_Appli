@@ -63,12 +63,13 @@
 }
 
 .block2{
-  width: 45%;
+  width: 55%;
   height: 50%;
   display: flex;
   justify-content: center;
   align-content: space-around;
   flex-wrap: wrap;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
 }
 
 .toggle {
@@ -142,6 +143,8 @@
   min-width: 120px;
   color: white;
   min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
   margin: 10px;
 }
 
@@ -151,6 +154,8 @@
   min-width: 120px;
   color: white;
   min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
   margin: 10px;
 }
 

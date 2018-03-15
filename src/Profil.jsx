@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
 
 class Profil extends Component {
     constructor(props) {
@@ -25,8 +24,8 @@ class Profil extends Component {
         })
     }
 
-    render() {        
-        let user = this.state.user.map((user) => {            
+    render() {
+        let user = this.state.user.map((user) => {
             return (
                 <div className="buttonGenreMusique" style={{ backgroundImage: `url(${user.picture})` }}>
                     <p style={{ marginTop: "40px", fontSize: "24px" }}>{user.name.replace("\"", "").replace("\"", "")}</p>
@@ -41,16 +40,26 @@ class Profil extends Component {
                 </div>
                 <div className="blockMyProfil">
                     <div className="block2">
-                        <h2 style={{ margin: "10px" }}>Nom : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).nom}</p>
-                        <h2 style={{ margin: "10px" }}>Prenom : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).prenom}</p>
-                        <h2 style={{ margin: "10px" }}>Date de naissance : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).dateNaissance}</p>
-                        <h2 style={{ margin: "10px" }}>Age : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).age}</p>
-                        <h2 style={{ margin: "10px" }}>email : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).email}</p>
-                        <h2 style={{ margin: "10px" }}>Adresse : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.user).adresse}</p>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Nom : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).nom}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Prenom : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).prenom}</p>
+                        </div>
+                        <div style={{ width: "40%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Date de naissance : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).dateNaissance}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Age : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).age}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>email : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).email}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Adresse : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.user).adresse}</p>
+                        </div>
                     </div>
-
                 </div>
-                <Divider />
                 <div className="tableauListGenre">
                     {user}
                 </div>

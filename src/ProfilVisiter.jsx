@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
 let commun;
 
 class ProfilVisiter extends Component {
@@ -9,6 +8,7 @@ class ProfilVisiter extends Component {
         super(props);
         this.state = {
             user: [],
+            userVisiter: []
         };
     }
 
@@ -24,12 +24,25 @@ class ProfilVisiter extends Component {
         }).then(data => {
             this.setState({ user: data.interetsMusicaux });
         })
+        fetch('http://localhost:8082/user', {
+            method: 'GET',
+            headers: {
+                'email': JSON.parse(sessionStorage.user).email,
+                'Content-Type': 'application/json'
+            }
+        }).then(results => {
+            return results.json();
+        }).then(data => {
+            this.setState({ userVisiter: data.interetsMusicaux });
+        })
     }
 
     render() {
-        let user = this.state.user.map((user) => { 
-            commun = JSON.parse(sessionStorage.user).interetsMusicaux.map((commun) => {                
-                if (commun.name === user.name) {
+        let user = this.state.user.map((user) => {
+            commun = this.state.userVisiter.map((commun) => {
+                console.log("user.name : " + user.name + "   |   commun.name : " + commun.name );
+                
+                if (user.name === commun.name) {
                     return (
                         <div className="buttonGenreMusiqueCommun" style={{ backgroundImage: `url(${commun.picture})` }}>
                             <p style={{ marginTop: "40px", fontSize: "24px" }}>{commun.name.replace("\"", "").replace("\"", "")}</p>
@@ -52,12 +65,18 @@ class ProfilVisiter extends Component {
                 </div>
                 <div className="blockMyProfil">
                     <div className="block2">
-                        <h2 style={{ margin: "10px" }}>Nom : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).nom}</p>
-                        <h2 style={{ margin: "10px" }}>Prenom : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).prenom}</p>
-                        <h2 style={{ margin: "10px" }}>Date de naissance : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).dateNaissance}</p>
-                        <h2 style={{ margin: "10px" }}>Age : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).age}</p>
-                        <h2 style={{ margin: "10px" }}>email : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).email}</p>
-                        <h2 style={{ margin: "10px" }}>Adresse : </h2><p style={{ margin: "10px" }}>{JSON.parse(sessionStorage.userVisiter).adresse}</p>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Nom : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.userVisiter).nom}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Prenom : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.userVisiter).prenom}</p>
+                        </div>
+                        <div style={{ width: "40%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Date de naissance : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.userVisiter).dateNaissance}</p>
+                        </div>
+                        <div style={{ width: "30%", display: "flex", justifyContent: "center" }}>
+                            <h2 style={{ margin: "10px" }}>Age : </h2><p style={{ marginTop: "15px" }}>{JSON.parse(sessionStorage.userVisiter).age}</p>
+                        </div>
                     </div>
                 </div>
                 <div className="tableauListGenre">

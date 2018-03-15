@@ -67,7 +67,7 @@ class App extends Component {
       menu = <div><MenuItem onClick={this.handleClick(7)}>Deconnexion</MenuItem>
         <MenuItem onClick={this.handleClick(3)}>Modification</MenuItem>
         <MenuItem onClick={this.handleClick(4)}>Profil</MenuItem>
-        <MenuItem onClick={this.handleClick(5)}>Home</MenuItem>
+        <MenuItem onClick={this.handleClick(5)}>Carte</MenuItem>
         <MenuItem onClick={this.handleClick(6)}>Musique</MenuItem></div>
     }
     return (

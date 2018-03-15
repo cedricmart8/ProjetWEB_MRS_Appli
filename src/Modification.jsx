@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Toggle from 'material-ui/Toggle';
 import Snackbar from 'material-ui/Snackbar';
 
 class Modification extends Component {
@@ -106,13 +105,13 @@ class Modification extends Component {
                         <TextField floatingLabelText="Date de naissane" name="dateNaissance" defaultValue={JSON.parse(sessionStorage.user).dateNaissance} onChange={this.handleChange} errorText="format : jj/mm/aaaa" />
                         {/* <DatePicker floatingLabelText="Date de naissane" mode="landscape" defaultValue={this.state.dateNaissance}/> */}
                         <br />
-                        <div className="toggle">
+                        {/* <div className="toggle">
                             <Toggle label="Compte publique" name="profilPublic" onChange={this.handleChange} />
                         </div>
                         <br />
                         <div className="toggle">
                             <Toggle label="Autoriser la localisation" name="localisationPartage" defaultToggled={true} onChange={this.handleChange} />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <br />
