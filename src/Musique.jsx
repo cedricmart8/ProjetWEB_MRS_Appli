@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 class Musique extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ class Musique extends Component {
         this.state = {
             musique: [],
             email: "",
-            idGenreMusical: ""
+            idGenreMusical: "",
+            openSnackbar: false
         };
     }
 
@@ -40,9 +42,14 @@ class Musique extends Component {
         }).then(results => {
             return results;
         }).then(data => {
-            return "test";
+            this.setState({openSnackbar: true});
+            return "test";            
         })
     }
+
+    handleRequestClose = () => {
+        this.setState({ openSnackbar: false });
+    };
 
 
     render() {
@@ -65,7 +72,8 @@ class Musique extends Component {
                 </div>
                 <br />
                 <RaisedButton label="OK" onClick={this.props.navig(5)} />
-                <br />
+                <br />                
+                <Snackbar open={this.state.openSnackbar} message="Ajouté !" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
             </div>
         )
     }
