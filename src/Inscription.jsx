@@ -66,7 +66,7 @@ class Inscription extends Component {
                                     "_id": 0,
                                     "className": "iut.nantes.projetMRS.entity.EntityGenreMusic",
                                     "name": "\"test\"",
-                                    "picture": "\"https://test\""
+                                    "picture": "\"test\""
                                 }],
                                 "localisation": {
                                     "latitude": this.state.latitude,

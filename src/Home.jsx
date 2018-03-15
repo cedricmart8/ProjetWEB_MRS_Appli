@@ -7,7 +7,6 @@ import Snackbar from 'material-ui/Snackbar';
 let localisationUser;
 let latitude;
 let longitude;
-let seVisiter;
 
 const MyMapComponent = compose(
     withProps({
@@ -90,7 +89,7 @@ class Home extends Component {
             return "test";
         })
         sessionStorage.setItem("userVisiter", JSON.stringify(e));
-        if (e.email == JSON.parse(sessionStorage.user).email) {
+        if (e.email === JSON.parse(sessionStorage.user).email) {
             this.setState({ openSnackbar: true })
         } else {
             sessionStorage.setItem('navigation', 8);
