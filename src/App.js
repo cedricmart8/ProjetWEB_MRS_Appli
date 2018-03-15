@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './data/logo.jpg';
+import logo from './data/logo.png';
 import './App.css';
 import Connexion from './Connexion.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Musique from './Musique'
+import ProfilVisiter from './ProfilVisiter';
 let res;
 let menu;
 
@@ -53,6 +54,8 @@ class App extends Component {
       sessionStorage.clear();
       this.handleClick(1);
       window.location.reload();
+    } else if (parseInt(this.state.navigation, 10) === 8) {
+      res = <ProfilVisiter name="ProfilVisiter" navig={this.handleClick}/>
     } else {
       res = <Connexion name="Connexion" navig={this.handleClick} />
     }

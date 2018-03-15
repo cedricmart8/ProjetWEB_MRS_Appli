@@ -3,9 +3,11 @@ import './App.css';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, } from 'material-ui/Table';
+import Snackbar from 'material-ui/Snackbar';
 let localisationUser;
 let latitude;
 let longitude;
+let seVisiter;
 
 const MyMapComponent = compose(
     withProps({
@@ -33,7 +35,8 @@ class Home extends Component {
             email: "",
             lat: "",
             lng: "",
-            user: []
+            user: [],
+            openSnackbar: false
         };
     }
 
@@ -67,33 +70,43 @@ class Home extends Component {
         })
     }
 
+    handleRequestClose = () => {
+        this.setState({ openSnackbar: false });
+    };
+
     test(e) {
         console.log(e);
+
+        fetch('http://localhost:8082/addPersonneVisiter', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'emailPersonneConnecter': JSON.parse(sessionStorage.user).email,
+                'emailPersonneVisiter': e.email
+            }
+        }).then(results => {
+            return results;
+        }).then(data => {
+            return "test";
+        })
+        sessionStorage.setItem("userVisiter", JSON.stringify(e));
+        if (e.email == JSON.parse(sessionStorage.user).email) {
+            this.setState({ openSnackbar: true })
+        } else {
+            sessionStorage.setItem('navigation', 8);
+            window.location.reload();
+        }
     }
 
 
     render() {
-        console.log(navigator.geolocation);
-        
-        if (navigator.geolocation) {            
-            navigator.geolocation.getCurrentPosition((position) => {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };                
-                console.log("latitude : " + pos.lat + "  | lng  : " + pos.lng);
-                console.log("test2");
-            });
-            
-        }
-
         localisationUser = this.state.user.map((user) => {
             // console.log(user.nom + "  :  " + user.localisation);
             // console.log(Object.values(user.localisation)[0]);
             latitude = Object.values(user.localisation)[0];
             longitude = Object.values(user.localisation)[1];
             return (
-                <Marker onClick={this.test.bind(this, user.email)} label={user.nom} position={{ lat: latitude, lng: longitude }} />
+                <Marker onClick={this.test.bind(this, user)} label={user.nom} position={{ lat: latitude, lng: longitude }} />
             )
         });
         return (
@@ -126,6 +139,7 @@ class Home extends Component {
                         </Table>
                     </div>
                     <MyMapComponent isMarkerShown />
+                    <Snackbar open={this.state.openSnackbar} message="C'est vous !" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
                     {/* <div className="block2Home">
                         <Table height="300px" fixedHeader={this.state.fixedHeader} selectable={this.state.selectable}   >
                             <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes}>

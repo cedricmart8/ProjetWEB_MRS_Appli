@@ -18,16 +18,12 @@ class Profil extends Component {
                 </div>
                 <div className="blockMyProfil">
                     <div className="block2">
-                        <div>
-                            <h2>Nom : </h2>{JSON.parse(sessionStorage.user).nom}
-                            <h2>Prenom : </h2>{JSON.parse(sessionStorage.user).prenom}
-                            <h2>Date de naissance : </h2>{JSON.parse(sessionStorage.user).dateNaissance}
-                            <h2>Age : </h2>{JSON.parse(sessionStorage.user).age}
-                            <h2>email : </h2>{JSON.parse(sessionStorage.user).email}
-                            <h2>Adresse : </h2>{JSON.parse(sessionStorage.user).adresse}
-                            <h2>Localisation Partager : </h2>{JSON.parse(sessionStorage.user).localisationPartage}
-                            <h2>Profil Public : </h2>{JSON.parse(sessionStorage.user).profilPublic}
-                        </div>
+                        <h2 style={{margin:"10px"}}>Nom : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).nom}</p>
+                        <h2 style={{margin:"10px"}}>Prenom : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).prenom}</p>
+                        <h2 style={{margin:"10px"}}>Date de naissance : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).dateNaissance}</p>
+                        <h2 style={{margin:"10px"}}>Age : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).age}</p>
+                        <h2 style={{margin:"10px"}}>email : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).email}</p>
+                        <h2 style={{margin:"10px"}}>Adresse : </h2><p style={{margin:"10px"}}>{JSON.parse(sessionStorage.user).adresse}</p>
                     </div>
                 </div>
                 <br />
