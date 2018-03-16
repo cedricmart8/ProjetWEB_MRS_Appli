@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import RaisedButton from 'material-ui/RaisedButton';
-let commun;
 
 class ProfilVisiter extends Component {
     constructor(props) {
@@ -39,25 +38,23 @@ class ProfilVisiter extends Component {
 
     render() {
         let user = this.state.user.map((user) => {
-            commun = this.state.userVisiter.map((commun) => {
-                console.log("user.name : " + user.name + "   |   commun.name : " + commun.name );
-                
-                if (user.name === commun.name) {
-                    return (
-                        <div className="buttonGenreMusiqueCommun" style={{ backgroundImage: `url(${commun.picture})` }}>
-                            <p style={{ marginTop: "40px", fontSize: "24px" }}>{commun.name.replace("\"", "").replace("\"", "")}</p>
-                        </div>
-                    )
-                } else {
-                    return null
-                }
-            });
             return (
                 <div className="buttonGenreMusique" style={{ backgroundImage: `url(${user.picture})` }}>
                     <p style={{ marginTop: "40px", fontSize: "24px" }}>{user.name.replace("\"", "").replace("\"", "")}</p>
                 </div>
             )
         });
+        let commun = this.state.userVisiter.map((commun) => {
+            // console.log("user.name : " + user.name.replace("\"", "").replace("\"", "") + "   |   commun.name : " + commun.name.replace("\"", "").replace("\"", ""));
+            // console.log(user.name.replace("\"", "").replace("\"", "") === commun.name.replace("\"", "").replace("\"", ""));
+            return (
+                <div className="buttonGenreMusique" style={{ backgroundImage: `url(${commun.picture})` }}>
+                    <p style={{ marginTop: "40px", fontSize: "24px" }}>{commun.name.replace("\"", "").replace("\"", "")}</p>
+                </div>
+            )
+        });
+        console.log(commun);
+
         return (
             <form action="profil.html" method="post">
                 <div className="blockTitle">
@@ -79,10 +76,11 @@ class ProfilVisiter extends Component {
                         </div>
                     </div>
                 </div>
+                <h1>Ses interets</h1>
                 <div className="tableauListGenre">
                     {user}
                 </div>
-                <h1>Genre musical en commun</h1>
+                <h1>Vos interets</h1>
                 <div className="tableauListGenre">
                     {commun}
                 </div>

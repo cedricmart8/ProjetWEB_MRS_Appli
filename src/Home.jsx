@@ -95,6 +95,7 @@ class Home extends Component {
             sessionStorage.setItem('navigation', 8);
             window.location.reload();
         }
+        
     }
 
 

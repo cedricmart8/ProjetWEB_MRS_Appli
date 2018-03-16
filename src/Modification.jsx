@@ -43,20 +43,8 @@ class Modification extends Component {
                 'profilPublic': this.state.profilPublic
             }
         })
-        fetch('http://localhost:8082/user', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'email': JSON.parse(sessionStorage.user).email
-            }
-        }).then(results => {
-            return results.json();
-        }).then(data => {
-            sessionStorage.setItem('user',  JSON.stringify(data));
-        })
         sessionStorage.setItem('navigation', 5);
         return window.location.reload();
-        // return null;
     }
 
     deleteUser(a) {
@@ -75,14 +63,29 @@ class Modification extends Component {
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
         console.log(this.state.localisationPartage);
-        
+
     }
 
     handleRequestClose = () => {
         this.setState({ openSnackbar: false, openSnackbar2: false });
     };
 
+    arriveSurLaPage() {
+        fetch('http://localhost:8082/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'email': JSON.parse(sessionStorage.user).email
+            }
+        }).then(results => {
+            return results.json();
+        }).then(data => {
+            sessionStorage.setItem('user', JSON.stringify(data));
+        })
+    };
+
     render() {
+        this.arriveSurLaPage();
         return (
             <form action="profil.html" method="post">
                 <div className="blockTitle">
@@ -95,8 +98,6 @@ class Modification extends Component {
                         <TextField floatingLabelText="Prenom" defaultValue={JSON.parse(sessionStorage.user).prenom} onChange={this.handleChange} name="prenom" />
                         <br />
                         <TextField floatingLabelText="Mot de passe" defaultValue={JSON.parse(sessionStorage.user).motDePasse} name="motDePasse" onChange={this.handleChange} type="password" />
-                        <br />
-                        <TextField floatingLabelText="Email" name="email" defaultValue={JSON.parse(sessionStorage.user).email} onChange={this.handleChange} />
                         <br />
                     </div>
                     <div className="blockCentrale">
